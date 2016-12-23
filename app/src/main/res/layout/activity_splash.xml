@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_splash"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/teal"
+    tools:context="com.hpy.cn.zhtemplate.mvp.Splash.SplashActivity">
+
+    <me.wangyuwei.particleview.ParticleView
+        android:id="@+id/pV_anime"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:pv_background_color="@color/lightseagreen"
+        app:pv_host_text="ZHONGHUAN"
+        app:pv_host_text_anim_time="1000"
+        app:pv_host_text_size="18sp"
+        app:pv_particle_text="中环"
+        app:pv_particle_text_size="30sp"
+        app:pv_spread_anim_time="1000"
+        app:pv_text_anim_time="1000"
+        app:pv_text_color="@color/ghostwhite" />
+
+
+    <!--动画完了之后的广告页-->
+    <ImageView
+        android:id="@+id/iV_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:paddingTop="5dp"
+        android:paddingEnd="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/lLayout_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/skipbuttonshape"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            >
+
+            <TextView
+                android:id="@+id/tV_seconds"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingStart="5dp"
+                android:paddingTop="5dp"
+                android:text="3"
+                android:textSize="16sp" />
+
+            <TextView
+                android:paddingStart="5dp"
+                android:id="@+id/tV_skip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingEnd="5dp"
+                android:paddingTop="5dp"
+                android:text="秒后跳过"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
