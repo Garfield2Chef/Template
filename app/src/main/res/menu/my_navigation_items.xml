@@ -1,9 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/action_case"
-          android:title="主页"
-          android:icon="@drawable/ic_action_case">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+            android:icon="@drawable/ic_home_black_24dp"
+            android:id="@+id/action_home"
+            android:enabled="true"
+            app:showAsAction="ifRoom"
+            android:title="主页"/>
 
-    </item>
-
+    <item
+            android:icon="@drawable/ic_search_black_24dp"
+            android:id="@+id/action_search"
+            android:enabled="true"
+            app:showAsAction="ifRoom"
+            android:title="搜索"/>
+    <item
+            android:id="@+id/action_me"
+            android:icon="@drawable/ic_account_circle_black_24dp"
+            android:enabled="true"
+            app:showAsAction="ifRoom"
+            android:title="我的"
+            />
+    <item
+            android:id="@+id/action_setting"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:enabled="true"
+            app:showAsAction="ifRoom"
+            android:title="设置"
+            />
 </menu>

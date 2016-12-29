@@ -14,6 +14,8 @@ import com.hpy.cn.zhtemplate.mvp.Home.HomeActivity;
 import com.hpy.cn.zhtemplate.retrofit.ApiCallback;
 import com.hpy.cn.zhtemplate.util.StaticUtils;
 
+import rx.Observable;
+
 /**
  * Radio2Chef@Gmail.com
  * <p>
@@ -53,4 +55,5 @@ public class LoginPresenter extends BasePresenterImpl<LoginView> {
         });
 
     }
+
 }

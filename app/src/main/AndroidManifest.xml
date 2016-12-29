@@ -26,7 +26,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".mvp.WelcomeGuide.WeilcomeGuideActivity" />
-        <activity android:name=".mvp.Login.LoginActivity"></activity>
+        <activity android:name=".mvp.Login.LoginActivity"
+                  android:theme="@style/NostatusTheme"></activity>
     </application>
 
 </manifest>
