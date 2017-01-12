@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hpy.cn.zhtemplate.R;
+import com.hpy.cn.zhtemplate.base.BasePresenterImpl;
 import com.hpy.cn.zhtemplate.base.LazyLoadFragment;
 
 /**
@@ -27,6 +28,11 @@ public class SettingsFragment extends LazyLoadFragment {
     @Override
     protected int setContentView() {
         return R.layout.fragment_settings;
+    }
+
+    @Override
+    protected BasePresenterImpl createPresenter() {
+        return null;
     }
 
     @Override

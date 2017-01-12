@@ -1,11 +1,14 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
-                                                 android:id="@+id/layout"
-                                                 android:layout_width="match_parent"
-                                                 android:layout_height="match_parent">
+<android.support.design.widget.CoordinatorLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
-
-
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <android.support.v7.widget.Toolbar
                 app:layout_behavior="@string/bye_burger_title_behavior"
@@ -16,18 +19,13 @@
                 >
         </android.support.v7.widget.Toolbar>
 
-        <com.hpy.cn.zhtemplate.wheel.NoScrollViewPager
-                android:id="@+id/viewPager"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
 
         <android.support.design.widget.BottomNavigationView
                 android:id="@+id/bottom_tab"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/teal"
-                android:layout_gravity="bottom"
+                android:layout_alignParentBottom="true"
                 app:itemIconTint="#fff"
                 app:itemTextColor="#fff"
                 app:layout_behavior="@string/bye_burger_bottom_behavior"
@@ -35,6 +33,13 @@
                 >
         </android.support.design.widget.BottomNavigationView>
 
+        <com.hpy.cn.zhtemplate.wheel.NoScrollViewPager
+                android:layout_below="@id/toolbar"
+                android:layout_above="@id/bottom_tab"
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+    </RelativeLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>

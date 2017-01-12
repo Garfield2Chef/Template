@@ -1,5 +1,6 @@
 package com.hpy.cn.zhtemplate.retrofit;
 
+import com.hpy.cn.zhtemplate.entity.CaseEntity;
 import com.hpy.cn.zhtemplate.entity.LoginStatus;
 
 import com.hpy.cn.zhtemplate.entity.RequestEntity;
@@ -7,6 +8,7 @@ import com.hpy.cn.zhtemplate.entity.TbUser;
 import com.hpy.cn.zhtemplate.entity.TestEntity;
 
 import java.net.PasswordAuthentication;
+import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -26,9 +28,11 @@ public interface ApiStores {
     @GET("{dataType}/{requestNumber}/{page}")
     Observable<TestEntity> getFromGank(@Path("dataType") String dataType,@Path("requestNumber") String requestNumber,@Path("page") String page);
 
-
     @POST("{action}")
     Observable<RequestEntity<TbUser>> accessServerByAction(@Path("action")String action,@Query("loginName") String loginName, @Query("password") String password);
 
+    //findCaselist
+    @POST("{action}")
+    Observable<RequestEntity<List<CaseEntity>>> findCaseList(@Path("action")String action);
 
 }

@@ -44,7 +44,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
     }
 
     public void initData() {
-
+        mContext=this;
     }
 
     @Override

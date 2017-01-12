@@ -14,14 +14,22 @@ import android.view.ViewGroup;
  * 2.切换到其他页面时停止加载数据（可选）
  * Created by HePy on 2016/12/14.
  */
-public abstract class LazyLoadFragment extends BaseFragment {
+public abstract class LazyLoadFragment<P extends BasePresenterImpl> extends BaseFragment {
     /**
      * 视图是否已经初始化
      */
+    protected P mvpPresenter;
     protected boolean isInit = false;
     protected boolean isLoad = false;
     protected final String TAG = "LazyLoadFragment";
     private View view;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        mvpPresenter=createPresenter();
+        super.onCreate(savedInstanceState);
+
+    }
 
     @Nullable
     @Override
@@ -43,6 +51,7 @@ public abstract class LazyLoadFragment extends BaseFragment {
     }
 
 
+    protected abstract P createPresenter();
 
     /**
      * 视图是否已经对用户可见，系统的方法
@@ -75,6 +84,10 @@ public abstract class LazyLoadFragment extends BaseFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        if(mvpPresenter != null)
+        {
+            mvpPresenter.detachView();
+        }
         isInit = false;
         isInit = false;
     }

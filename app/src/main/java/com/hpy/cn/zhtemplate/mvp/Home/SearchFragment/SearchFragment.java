@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hpy.cn.zhtemplate.R;
+import com.hpy.cn.zhtemplate.base.BasePresenterImpl;
 import com.hpy.cn.zhtemplate.base.LazyLoadFragment;
 
 /**
@@ -24,6 +25,11 @@ public class SearchFragment extends LazyLoadFragment {
     @Override
     protected int setContentView() {
         return R.layout.fragment_search;
+    }
+
+    @Override
+    protected BasePresenterImpl createPresenter() {
+        return null;
     }
 
     @Override

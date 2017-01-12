@@ -7,31 +7,67 @@ package com.hpy.cn.zhtemplate.entity;
  */
 
 public class CaseEntity {
-    private String title;
-    private String content;
-    private String picurl;
+    private String projectName;
+    private String faultType;
+    private String releaseTime;
+    private String caseState;
+    private String address;
+    private String caseNo;
+    private String casePicUrl;
 
-    public String getTitle() {
-        return title;
+    public String getProjectName() {
+        return projectName;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setProjectName(String projectName) {
+        this.projectName = projectName;
     }
 
-    public String getContent() {
-        return content;
+    public String getFaultType() {
+        return faultType;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setFaultType(String faultType) {
+        this.faultType = faultType;
     }
 
-    public String getPicurl() {
-        return picurl;
+    public String getReleaseTime() {
+        return releaseTime;
     }
 
-    public void setPicurl(String picurl) {
-        this.picurl = picurl;
+    public void setReleaseTime(String releaseTime) {
+        this.releaseTime = releaseTime;
+    }
+
+    public String getCaseState() {
+        return caseState;
+    }
+
+    public void setCaseState(String caseState) {
+        this.caseState = caseState;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCaseNo() {
+        return caseNo;
+    }
+
+    public void setCaseNo(String caseNo) {
+        this.caseNo = caseNo;
+    }
+
+    public String getCasePicUrl() {
+        return casePicUrl;
+    }
+
+    public void setCasePicUrl(String casePicUrl) {
+        this.casePicUrl = casePicUrl;
     }
 }

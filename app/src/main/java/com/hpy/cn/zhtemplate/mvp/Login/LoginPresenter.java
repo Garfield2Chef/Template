@@ -26,33 +26,36 @@ public class LoginPresenter extends BasePresenterImpl<LoginView> {
     public LoginPresenter(LoginView v){attachView(v);}
 
     public void login(String username, String password){
-
-        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password))
-        {
-            mvpView.showFail((String) Myapplication.getFromResource(R.string.cant_be_empty,""));
-            return;
-        }
-        mvpView.showLoading();
-        addSubscription(apiStores.accessServerByAction(StaticUtils.LOGIN_ACTION,username, password), new ApiCallback<RequestEntity<TbUser>>() {
-
-            @Override
-            public void onSuccess(RequestEntity<TbUser> model) {
-                mvpView.LoginSuccess();
+//
+//        if(TextUtils.isEmpty(username) || TextUtils.isEmpty(password))
+//        {
+//            mvpView.showFail((String) Myapplication.getFromResource(R.string.cant_be_empty,""));
+//            return;
+//        }
+//        mvpView.showLoading();
+//        addSubscription(apiStores.accessServerByAction(StaticUtils.LOGIN_ACTION,username, password), new ApiCallback<RequestEntity<TbUser>>() {
+//
+//            @Override
+//            public void onSuccess(RequestEntity<TbUser> model) {
+//                mvpView.LoginSuccess();
+//                Intent intent = new Intent(Myapplication.getInstance(), HomeActivity.class);
+//                mvpView.getActivity().startActivity(intent);
+//                mvpView.getActivity().finish();
+//            }
+//
+//            @Override
+//            public void onFailure(String msg) {
+//                mvpView.showFail(msg);
+//            }
+//
+//            @Override
+//            public void onFinish() {
+//                mvpView.hideLoading();
+//            }
+//        });
                 Intent intent = new Intent(Myapplication.getInstance(), HomeActivity.class);
                 mvpView.getActivity().startActivity(intent);
                 mvpView.getActivity().finish();
-            }
-
-            @Override
-            public void onFailure(String msg) {
-                mvpView.showFail(msg);
-            }
-
-            @Override
-            public void onFinish() {
-                mvpView.hideLoading();
-            }
-        });
 
     }
 

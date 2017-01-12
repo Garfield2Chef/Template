@@ -13,6 +13,7 @@ import rx.Subscriber;
 
 public abstract class ApiCallback<M> extends Subscriber<M> {
 
+
     public abstract void onSuccess(M model);
     public abstract void onFailure(String msg);
     public abstract void onFinish();
