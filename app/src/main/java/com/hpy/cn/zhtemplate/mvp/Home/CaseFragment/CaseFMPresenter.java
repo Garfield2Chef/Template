@@ -38,7 +38,7 @@ public class CaseFMPresenter extends BasePresenterImpl<CaseFMView> {
 //          }
 //      });
         List<CaseEntity> model = new ArrayList<>();
-        for(int i=0;i<10;i++){
+        for(int i=0;i<5;i++){
 
             CaseEntity caseEntity = new CaseEntity();
             caseEntity.setAddress("address:"+i);

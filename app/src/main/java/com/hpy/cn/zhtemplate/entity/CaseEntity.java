@@ -1,12 +1,14 @@
 package com.hpy.cn.zhtemplate.entity;
 
+import java.io.Serializable;
+
 /**
  * Radio2Chef@Gmail.com
  *
  * Created by HePy on 2016/12/27.
  */
 
-public class CaseEntity {
+public class CaseEntity implements Serializable {
     private String projectName;
     private String faultType;
     private String releaseTime;

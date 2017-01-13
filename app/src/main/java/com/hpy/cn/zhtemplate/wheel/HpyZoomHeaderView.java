@@ -1,9 +1,17 @@
 package com.hpy.cn.zhtemplate.wheel;
 
+import android.animation.ValueAnimator;
+import android.app.Activity;
 import android.content.Context;
+import android.support.design.widget.AppBarLayout;
+import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +32,12 @@ public class HpyZoomHeaderView extends LinearLayout {
     private float iDownY;
     //图片放到最大时候的y
     private float mMaxY;
+    //是否展开
+    private boolean isExpand = false;
+
+    private AppBarLayout mAppBarLayout;
+
+    private final int ANIMATE_LENGTH = 300;
 
     public HpyZoomHeaderView(Context context) {
         super(context);
@@ -45,7 +59,7 @@ public class HpyZoomHeaderView extends LinearLayout {
         mViewPager = (HpyZoomHeaderViewPager) getChildAt(1);
         //子view左上角相对于父view左上角的坐标！！！
         mFirstY = getY();
-//        mCloseText = findViewById(R.id.tV_close);
+        mCloseText = (TextView) findViewById(R.id.tV_close);
     }
 
     @Override
@@ -59,15 +73,162 @@ public class HpyZoomHeaderView extends LinearLayout {
 
                 //向上滑动viewpager整体移动
                 if (currentY + moveY < 0 && currentY + moveY > -getHeight() / 2) {
+                    doPagerUp(moveY, currentY);
+                }
+                if (currentY + moveY > 0 && currentY + moveY < 800) {
+                    doPagerDown(moveY, currentY);
+                    //消费掉该事件
+                    return true;
+                }
+            case MotionEvent.ACTION_UP:
 
+                float upY = event.getY() - iDownY;
+                float currentUpY = getY();
+                //超过阀值 结束Activity
+
+                if (upY + currentUpY > 190) {
+                    finish();
                 }
 
+                //不在任何阀值  恢复
+                if (currentUpY + upY > -getHeight() / 4 && currentUpY + upY < 190) {
+                    restore(upY + currentUpY);
+                }
+
+                //超过展开阀值
+                if (upY + currentUpY < -getHeight() / 4) {
+                    if (upY + currentUpY < mMaxY) {
+                        expand(mMaxY);
+                    } else {
+                        expand(upY + currentUpY);
+                    }
+                }
+                return true;
         }
         return super.onTouchEvent(event);
     }
 
-    public void doPagerUp(float moveY,float currentY){
-        mMaxY=moveY+currentY;
+    private void doPagerDown(float moveY, float currentY) {
+        int pos = mViewPager.getCurrentItem();
+        View v = mViewPager.getChildAt(pos);
+        v.setTranslationY((currentY + moveY) / 4);
+        mCloseText.setAlpha(0.8f);
+    }
+
+    public void doPagerUp(float moveY, float currentY) {
+        mMaxY = moveY + currentY;
         setTranslationY(mMaxY);
+        mCloseText.setAlpha(0f);
+    }
+
+    public void restore(float y) {
+        mCloseText.setAlpha(0f);
+        if (y > mFirstY) {
+            ValueAnimator closeVa = ValueAnimator.ofFloat(1, 0);
+            closeVa.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                @Override
+                public void onAnimationUpdate(ValueAnimator animation) {
+                    mCloseText.setAlpha((Float) animation.getAnimatedValue());
+                }
+            });
+            closeVa.setDuration(ANIMATE_LENGTH);
+            closeVa.start();
+        }
+
+//        mNestedScrollView.scrollToPosition(0);
+        ValueAnimator restoreVa = ValueAnimator.ofFloat(y, mFirstY);
+        restoreVa.setInterpolator(new DecelerateInterpolator());
+        restoreVa.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float y = (float) animation.getAnimatedValue();
+                setTranslationY(y);
+                isExpand = false;
+                mViewPager.canScroll = true;
+            }
+        });
+        restoreVa.setDuration(ANIMATE_LENGTH);
+        restoreVa.start();
+
+        //禁止滑动
+//        ((CtrlLinearLayoutManager) mRecyclerView.getLayoutManager()).setScrollEnabled(false);
+
+    }
+
+
+    private void expand(float y) {
+
+        ValueAnimator va = ValueAnimator.ofFloat(y, -getHeight() / 3);
+        va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float y = (float) animation.getAnimatedValue();
+                mViewPager.canScroll = false;
+                setTranslationY(y);
+                isExpand = true;
+            }
+        });
+
+        va.setInterpolator(new DecelerateInterpolator());
+        va.setDuration(ANIMATE_LENGTH);
+        va.start();
+
+
+    }
+
+    public boolean isExpand() {
+        return isExpand;
+    }
+
+
+    private void finish() {
+        TranslateAnimation finishTa = new TranslateAnimation(0, 0, 0, 1000);
+        finishTa.setDuration(ANIMATE_LENGTH);
+        finishTa.setFillAfter(true);
+        finishTa.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                ((Activity) getContext()).finish();
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        startAnimation(finishTa);
+    }
+
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+
+        int action = ev.getAction();
+        switch (action) {
+            case MotionEvent.ACTION_DOWN:
+                iDownY = (int) ev.getY();
+
+                break;
+            case MotionEvent.ACTION_MOVE:
+                int moveY = (int) ev.getY();
+                if (Math.abs(moveY - iDownY) > mTouchSlop) {
+
+                    return true;
+                }
+        }
+        return super.onInterceptTouchEvent(ev);
+    }
+
+    public AppBarLayout getmAppBarLayout() {
+        return mAppBarLayout;
+    }
+
+    public void setmAppBarLayout(AppBarLayout mAppBarLayout) {
+        this.mAppBarLayout = mAppBarLayout;
     }
 }

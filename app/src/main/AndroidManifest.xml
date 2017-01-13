@@ -24,17 +24,20 @@
         <activity
                 android:name=".mvp.Login.LoginActivity"
                 android:theme="@style/NostatusTheme">
-
-        </activity>
-        <activity android:name=".mvp.Details.CaseDetailsActivity">
-        </activity>
-
-        <activity android:name=".wheel.test.MytestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+        </activity>
+        <activity android:name=".mvp.Details.CaseDetailsActivity"
+                android:theme="@style/translucent">
+
+        </activity>
+
+        <activity android:name=".wheel.test.MytestActivity">
+
         </activity>
     </application>
 

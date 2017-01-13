@@ -19,6 +19,7 @@ import com.hpy.cn.zhtemplate.entity.CaseEntity;
 import com.hpy.cn.zhtemplate.mvp.Details.CaseDetailsActivity;
 import com.hpy.cn.zhtemplate.mvp.Home.adapter.CaseRecyclerAdapter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,10 +90,14 @@ public class CaseFragment extends LazyLoadFragment<CaseFMPresenter> implements C
         mAdapter.setOnItemClickListener(new CaseRecyclerAdapter.RecyclerviewOnItemClickListener() {
             @Override
             public void onItemClick(View view, CaseEntity caseEntity) {
-                Intent intent = new Intent(Myapplication.getInstance(), CaseDetailsActivity.class);
-                startActivity(intent);
-                mActivity.finish();
-
+                try {
+                    Intent intent = new Intent(Myapplication.getInstance(), CaseDetailsActivity.class);
+                    intent.putExtra("list", (Serializable) mList);
+                    startActivity(intent);
+//                mActivity.finish();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
             }
         });

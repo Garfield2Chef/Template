@@ -16,7 +16,7 @@ import cn.bingoogolapple.bgabanner.transformer.ZoomFadePageTransformer;
  */
 
 public class HpyZoomHeaderViewPager extends ViewPager {
-    private boolean canScroll = true;
+    public boolean canScroll = true;
 
     public HpyZoomHeaderViewPager(Context context) {
         super(context);
